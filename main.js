@@ -25,6 +25,7 @@ function getBlazeTmplInstForSelection () {
     viewInst: Blaze.getView($0),
     data: Blaze.getData($0),
     template: null,
+    templateInst: null,
     view: null
   };
 
@@ -32,6 +33,9 @@ function getBlazeTmplInstForSelection () {
     var m = v.name.match(/^Template\.(.*)/);
     if (!info.template && m && m[1]) {
       info.template = m[1];
+    }
+    if (!info.templateInst && m && m[1]) {
+      info.templateInst = v._templateInstance;
     }
     if (!info.view && !m) {
       info.view = v.name;
@@ -53,4 +57,3 @@ chrome.devtools.panels.elements.createSidebarPane("Blaze", function (sidebar) {
 
   updateSidebar();
 });
-
